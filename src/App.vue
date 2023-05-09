@@ -3,7 +3,7 @@ import Vue from 'vue'
 import { RouterLink, RouterView } from 'vue-router'
 import bootstrap from 'bootstrap'
 import { BootstrapVue, IconsPlugin } from 'bootstrap-vue-next'
-import LoginBar from './components/LoginBar.vue'
+import LoginBar from '@/components/LoginBar.vue'
 </script>
 
 <template>

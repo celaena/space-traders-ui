@@ -1,6 +1,6 @@
 <script>
 import UserService from '../services/UserService';
-import { accountStore } from '@/stores/account'
+import { accountStore } from '@/stores/account';
 
 const userService = new UserService();
 

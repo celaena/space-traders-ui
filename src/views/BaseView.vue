@@ -2,6 +2,7 @@
 import UserService from '@/services/UserService';
 import SystemService from '@/services/SystemService';
 import ContractService from '@/services/ContractService';
+import FleetService from '@/services/FleetService';
 import { accountStore } from '@/stores/account';
 import Waypoint from '@/classes/waypoint';
 import Contract from '@/classes/contract';
@@ -11,6 +12,7 @@ import ContractCard from '@/components/ContractCard.vue';
 const userService = new UserService();
 const systemService = new SystemService();
 const contractService = new ContractService();
+const fleetService = new FleetService();
 
 export default {
   data() {
@@ -49,7 +51,7 @@ export default {
         this.shipyard = await systemService.viewShipyard(this.account.token, system, wp);
     },
     async purchaseShip(wp, type) {
-        await userService.purchaseShip(this.account.token, wp, type);
+        await fleetService.purchaseShip(this.account.token, wp, type);
     },
     async getContract(e) {
       this.contract = await contractService.getContract(this.account.token, 'clhfm42tp00lks60drc1511z8');

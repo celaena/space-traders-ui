@@ -20,6 +20,11 @@ import LoginBar from '@/components/LoginBar.vue'
     </header>
     <LoginBar></LoginBar>
 
+    <div class="btn-group" role="group" aria-label="Nav Tabs">
+      <RouterLink type="button" class="btn btn-primary" to="/">Base</RouterLink>
+      <RouterLink type="button" class="btn btn-primary" to="/ships">Ships</RouterLink>
+    </div>
+
     <RouterView />
   </div>
 </template>

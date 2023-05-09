@@ -9,6 +9,7 @@ import App from './App.vue'
 import router from './router'
 
 import WaypointCard from '@/components/WaypointCard.vue';
+import ContractCard from '@/components/ContractCard.vue';
 
 const app = createApp(App)
 
@@ -16,5 +17,6 @@ app.use(createPinia())
 app.use(router)
 
 app.component('WaypointCard', WaypointCard);
+app.component('ContractCard', ContractCard);
 
 app.mount('#app')

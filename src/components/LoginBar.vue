@@ -1,47 +1,20 @@
 <script>
-import axios from 'axios';
+import UserService from '../services/UserService';
+import { accountStore } from '@/stores/account'
+
+const userService = new UserService();
+
 export default {
   data() {
     return {
-      account: {
-        token: null,
-        user: {
-			accountId: null,
-			symbol: "Not logged in",
-			headquarters: null,
-			credits: null
-		},
-      }
+        token: undefined,
+        account: accountStore()
     }
   },
   methods: {
-    // createAccount(e) {
-    //     axios
-    //         .post('https://api.spacetraders.io/v2/register', {
-    //             'symbol': this.account.name,
-    //             'faction': 'COSMIC'
-    //         },
-    //         {
-    //             headers: {
-    //                 'Content-Type': 'application/json'
-    //             }
-    //         })
-    //         .then(response => {
-    //             console.log(response);
-    //             this.output = response.data;
-    //         });
-    // },
-    getDetails(e) {
-        axios.get('https://api.spacetraders.io/v2/my/agent',
-        {
-            headers: {
-                'Authorization': 'Bearer ' + this.account.token
-            }
-        })
-        .then(response => {
-            console.log(response);
-            this.account.user = response.data.data;
-        });
+    async getDetails(e) {
+        this.account.setToken(this.token);
+        this.account.setUser(await userService.getDetails(this.account.token));
     }
   }
 }
@@ -59,7 +32,7 @@ export default {
             <div class="input-group-prepend">
                 <span class="input-group-text">Token</span>
             </div>
-            <input type="text" class="form-control" v-model="account.token" />
+            <input type="text" class="form-control" v-model="token" />
             <div class="input-group-append">
                 <button type="button" class="btn btn-primary" @click="getDetails">Login</button>
             </div>

@@ -17,4 +17,11 @@ export default class SystemService {
         console.log(response);
         return response.data.data;
     }
+    async viewShipyard(token: string, system: string, waypoint: string) {
+        const response = await axios.get(
+            'https://api.spacetraders.io/v2/systems/' + system + '/waypoints/' + waypoint + '/shipyard', 
+            ServiceUtils.buildConfig(token));
+        console.log(response);
+        return response.data.data;
+    }
 }

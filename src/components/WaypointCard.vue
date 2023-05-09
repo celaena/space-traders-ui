@@ -40,7 +40,8 @@ export default {
           </div>
           <div class="card-body" :class="{collapse: isCollapsed}">
             <div class="row" v-for="trait in waypoint.traits">
-              <div class="col-3">{{ trait.name }}</div>
+              <a class="col-3" v-if="'SHIPYARD' === trait.symbol">{{ trait.name }}</a>
+              <div class="col-3" v-else>{{ trait.name }}</div>
               <div class="col">{{ trait.description }}</div>
             </div>
           </div>

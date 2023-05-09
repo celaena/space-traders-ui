@@ -1,4 +1,5 @@
 <script setup lang="js">
+import UserService from '@/services/UserService';
 import SystemService from '@/services/SystemService';
 import ContractService from '@/services/ContractService';
 import { accountStore } from '@/stores/account';
@@ -7,6 +8,7 @@ import Contract from '@/classes/contract';
 import WaypointCard from '@/components/WaypointCard.vue';
 import ContractCard from '@/components/ContractCard.vue';
 
+const userService = new UserService();
 const systemService = new SystemService();
 const contractService = new ContractService();
 
@@ -17,7 +19,9 @@ export default {
       nearbyWaypointPages: [],
       waypoints: [],
       waypoint: new Waypoint(),
-      contract: new Contract()
+      contract: new Contract(),
+      shipyardWaypoint: undefined,
+      shipyard: {}
     }
   },
   methods: {
@@ -40,6 +44,13 @@ export default {
         let system = waypoint.split('-').slice(0, 2).join('-');
         this.waypoint = await systemService.getWaypoint(this.account.token, system, waypoint);
     },
+    async viewShipyard(wp) {
+        let system = wp.split('-').slice(0, 2).join('-');
+        this.shipyard = await systemService.viewShipyard(this.account.token, system, wp);
+    },
+    async purchaseShip(wp, type) {
+        await userService.purchaseShip(this.account.token, wp, type);
+    },
     async getContract(e) {
       this.contract = await contractService.getContract(this.account.token, 'clhfm42tp00lks60drc1511z8');
     },
@@ -53,6 +64,24 @@ export default {
 
 <template>
   <main>
+    <div class="row">      
+      <div class="col-4">
+        <div class="input-group">
+            <div class="input-group-prepend">
+                <span class="input-group-text">Waypoint</span>
+            </div>
+            <input type="text" class="form-control" v-model="shipyardWaypoint" />
+            <div class="input-group-append">
+                <button type="button" class="btn btn-primary" @click="viewShipyard(shipyardWaypoint)">View Shipyard</button>
+            </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col" v-for="ship in shipyard.shipTypes">
+        <button type="button" class="btn btn-success" @click="purchaseShip(shipyardWaypoint, ship.type)">{{ ship.type }}</button>
+      </div>
+    </div>
     <div class="row">
       <div class="col">
         <button type="button" class="btn btn-primary" @click="getWaypoints">Get Nearby Waypoints</button>

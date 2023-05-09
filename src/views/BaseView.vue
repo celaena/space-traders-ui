@@ -26,6 +26,10 @@ export default {
     },
     async getContract(e) {
       this.contract = await contractService.getContract(this.account.token, 'clhfm42tp00lks60drc1511z8');
+    },
+    async acceptContract(e) {
+      await contractService.acceptContract(this.account.token, 'clhfm42tp00lks60drc1511z8');
+      this.getContract(null);
     }
   }
 }

@@ -14,7 +14,9 @@ export default {
   },
   methods: {
     async getWaypoint(e) {
-        this.waypoint = await systemService.getWaypoint(this.account.token, 'X1-DF55', 'X1-DF55-20250Z');
+        let waypoint = this.account.user.headquarters;
+        let system = waypoint.split('-').slice(0, 2).join('-');
+        this.waypoint = await systemService.getWaypoint(this.account.token, system, waypoint);
     }
   }
 }

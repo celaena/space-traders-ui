@@ -18,7 +18,7 @@ export default {
 <template>
     <div class="row">
       <div class="col">
-        <div class="card bg-dark text-white" @click="isCollapsed = true">
+        <div class="card bg-dark text-white" @click="isCollapsed = !isCollapsed">
           <div class="card-header">
             <div class="row">
               <div class="col">

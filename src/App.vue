@@ -1,21 +1,24 @@
 <script setup lang="ts">
+import Vue from 'vue'
 import { RouterLink, RouterView } from 'vue-router'
-import HelloWorld from './components/HelloWorld.vue'
+import bootstrap from 'bootstrap'
+import { BootstrapVue, IconsPlugin } from 'bootstrap-vue-next'
+import LoginBar from './components/LoginBar.vue'
 </script>
 
 <template>
   <header>
-    <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
-
     <div class="wrapper">
-      <HelloWorld msg="You did it!" />
+      <h3>Space Traders UI for Babby</h3>
 
-      <nav>
+      <!-- <nav>
         <RouterLink to="/">Home</RouterLink>
         <RouterLink to="/about">About</RouterLink>
-      </nav>
+      </nav> -->
     </div>
   </header>
+
+  <LoginBar></LoginBar>
 
   <RouterView />
 </template>

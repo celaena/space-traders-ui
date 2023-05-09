@@ -7,13 +7,18 @@ export default {
       type: Waypoint,
       default: () => (new Waypoint())
     }
+  },
+  data() {
+    return {
+        isCollapsed: true
+    }
   }
 }
 </script>
 <template>
     <div class="row">
       <div class="col">
-        <div class="card bg-dark text-white">
+        <div class="card bg-dark text-white" @click="isCollapsed = true">
           <div class="card-header">
             <div class="row">
               <div class="col">
@@ -33,7 +38,7 @@ export default {
               </div>
             </div>
           </div>
-          <div class="card-body">
+          <div class="card-body" :class="{collapse: isCollapsed}">
             <div class="row" v-for="trait in waypoint.traits">
               <div class="col-3">{{ trait.name }}</div>
               <div class="col">{{ trait.description }}</div>

@@ -14,11 +14,17 @@ export default {
   data() {
     return {
       account: accountStore(),
+      waypoints: [],
       waypoint: new Waypoint(),
       contract: new Contract()
     }
   },
   methods: {
+    async getWaypoints(e) {
+        let waypoint = this.account.user.headquarters;
+        let system = waypoint.split('-').slice(0, 2).join('-');
+        this.waypoints = await systemService.getWaypoints(this.account.token, system);
+    },
     async getWaypoint(e) {
         let waypoint = this.account.user.headquarters;
         let system = waypoint.split('-').slice(0, 2).join('-');
@@ -37,7 +43,19 @@ export default {
 
 <template>
   <main>
-    <button type="button" class="btn btn-primary" @click="getWaypoint">Get Waypoint</button>
+    <div class="row">
+      <div class="col">
+        <button type="button" class="btn btn-primary" @click="getWaypoints">Get Nearby Waypoints</button>
+      </div>
+      <div class="col">
+        <button type="button" class="btn btn-primary" @click="getWaypoint">Get Waypoint</button>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col" v-for="wp in waypoints">
+        <WaypointCard :waypoint="wp"></WaypointCard>
+      </div>
+    </div>
     <WaypointCard :waypoint="waypoint"></WaypointCard>
     <div class="row">
       <div class="col">

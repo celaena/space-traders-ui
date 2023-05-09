@@ -7,20 +7,21 @@ import LoginBar from '@/components/LoginBar.vue'
 </script>
 
 <template>
-  <header>
-    <div class="wrapper">
-      <h3>Space Traders UI for Babby</h3>
+  <!-- <div class="container"> -->
+    <header>
+      <div class="wrapper">
+        <h3>Space Traders UI for Babby</h3>
 
-      <!-- <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
-      </nav> -->
-    </div>
-  </header>
+        <!-- <nav>
+          <RouterLink to="/">Home</RouterLink>
+          <RouterLink to="/about">About</RouterLink>
+        </nav> -->
+      </div>
+    </header>
+    <LoginBar></LoginBar>
 
-  <LoginBar></LoginBar>
-
-  <RouterView />
+    <RouterView />
+  <!-- </div> -->
 </template>
 
 <style scoped>

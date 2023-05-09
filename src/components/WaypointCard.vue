@@ -46,7 +46,7 @@ export default {
           </div>
           <div class="card-footer">
             <div class="row">
-              <div class="col-2">
+              <div class="col">
                 Orbitals:
               </div>
               <div class="col" v-for="orbital in waypoint.orbitals">

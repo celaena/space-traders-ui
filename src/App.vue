@@ -7,7 +7,7 @@ import LoginBar from '@/components/LoginBar.vue'
 </script>
 
 <template>
-  <!-- <div class="container"> -->
+  <div class="container">
     <header>
       <div class="wrapper">
         <h3>Space Traders UI for Babby</h3>
@@ -21,7 +21,7 @@ import LoginBar from '@/components/LoginBar.vue'
     <LoginBar></LoginBar>
 
     <RouterView />
-  <!-- </div> -->
+  </div>
 </template>
 
 <style scoped>

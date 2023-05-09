@@ -14,6 +14,7 @@ export default {
   data() {
     return {
       account: accountStore(),
+      nearbyWaypointPages: [],
       waypoints: [],
       waypoint: new Waypoint(),
       contract: new Contract()
@@ -24,6 +25,15 @@ export default {
         let waypoint = this.account.user.headquarters;
         let system = waypoint.split('-').slice(0, 2).join('-');
         this.waypoints = await systemService.getWaypoints(this.account.token, system);
+        const pageSize = 4;
+        const max = this.waypoints.length - 1;
+        let i = 0;
+        for (i = 0; i <= max; i += pageSize) {
+          this.nearbyWaypointPages.push(this.waypoints.slice(i, i + pageSize));
+        }
+        if (i < max) {
+          this.nearbyWaypointPages.push(this.waypoints.slice(i, max));
+        }
     },
     async getWaypoint(e) {
         let waypoint = this.account.user.headquarters;
@@ -51,8 +61,8 @@ export default {
         <button type="button" class="btn btn-primary" @click="getWaypoint">Get Waypoint</button>
       </div>
     </div>
-    <div class="row">
-      <div class="col" v-for="wp in waypoints">
+    <div class="row" v-for="wpPage in nearbyWaypointPages">
+      <div class="col" v-for="wp in wpPage">
         <WaypointCard :waypoint="wp"></WaypointCard>
       </div>
     </div>

@@ -81,7 +81,17 @@ export default class FleetService {
     // todo: patch nav
     // todo: get nav
     // todo: warp
-    // todo: sell cargo
+    async sellCargo(token: string, symbol: string, good: string, units: number) {
+        const response = await axios.post(
+            'https://api.spacetraders.io/v2/my/ships/' + symbol + '/sell', 
+            {
+                "symbol": good,
+                "units": units
+            },
+            ServiceUtils.buildConfig(token));
+        console.log(response);
+        return response.data.data;
+    }
     // todo: scan system
     // todo: scan wp
     // todo: scan ships

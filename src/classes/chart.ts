@@ -1,4 +1,5 @@
 export default class Chart {
-    submittedBy?:string;
-    submittedOn?:Date;
+    waypointSymbol?: string;
+    submittedBy?: string;
+    submittedOn?: Date;
 }

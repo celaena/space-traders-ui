@@ -33,6 +33,9 @@ export default {
     },
     async extract() {
         await fleetService.extractResources(this.account.token, this.ship.symbol);
+    },
+    async sellCargo(good, amount) {
+        await fleetService.sellCargo(this.account.token, this.ship.symbol, good, amount);
     }
   }
 }
@@ -155,6 +158,9 @@ export default {
                 <div class="col">{{ item.name }}</div>
                 <div class="col">{{ item.description }}</div>
                 <div class="col">{{ item.units }}</div>
+                <div class="col">
+                    <button type="button" class="btn btn-success" @click="sellCargo(item.symbol, item.units)">Sell</button>
+                </div>
             </div>
             <div class="row">
                 <div class="col">{{ ship.fuel.current }} / {{ ship.fuel.capacity }}</div>

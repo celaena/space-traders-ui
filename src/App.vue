@@ -7,23 +7,18 @@ import LoginBar from '@/components/LoginBar.vue'
 </script>
 
 <template>
-  <div class="container">
-    <header>
-      <div class="wrapper">
+  <div class="container container-fluid">
+    <div class="row">
+      <div class="col">
         <h3>Space Traders UI for Babby</h3>
-
-        <!-- <nav>
-          <RouterLink to="/">Home</RouterLink>
-          <RouterLink to="/about">About</RouterLink>
-        </nav> -->
       </div>
-    </header>
+    </div>
     <LoginBar></LoginBar>
 
-    <div class="btn-group" role="group" aria-label="Nav Tabs">
-      <RouterLink type="button" class="btn btn-primary" to="/">Base</RouterLink>
-      <RouterLink type="button" class="btn btn-primary" to="/ships">Ships</RouterLink>
-      <RouterLink type="button" class="btn btn-primary" to="/market">Market</RouterLink>
+    <div class="btn-group w-100" role="group" aria-label="Nav Tabs">
+      <RouterLink type="button" class="btn btn-secondary" to="/">Base</RouterLink>
+      <RouterLink type="button" class="btn btn-secondary" to="/ships">Ships</RouterLink>
+      <RouterLink type="button" class="btn btn-secondary" to="/market">Market</RouterLink>
     </div>
 
     <RouterView />

@@ -15,6 +15,11 @@ export default {
     async listShips() {
         this.ships = await fleetService.listShips(this.account.token);
     }
+  },
+  mounted() {
+    if (this.account.token) {
+      this.listShips();
+    }
   }
 }
 </script>

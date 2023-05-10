@@ -12,9 +12,17 @@ export default {
     }
   },
   methods: {
-    async getDetails(e) {
-        this.account.setToken(this.token);
+    async getDetails() {
+        if (this.token) {
+          this.account.setToken(this.token);
+        }
         this.account.setUser(await userService.getDetails(this.account.token));
+        this.token = this.account.token;
+    }
+  },
+  mounted() {
+    if (this.account.token) {
+      this.getDetails();
     }
   }
 }
@@ -22,11 +30,6 @@ export default {
 <template>
   <div class="">
     <div class="row">
-        <!-- Might figure out what I want to do with this later -->
-      <!-- <div class="col">
-        <input type="text" v-model="account.name" />
-        <button type="button" class="btn btn-success" @click="createAccount">Create Account</button>
-      </div> -->
       <div class="col-4">
         <div class="input-group">
             <div class="input-group-prepend">

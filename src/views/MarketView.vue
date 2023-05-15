@@ -26,17 +26,17 @@ export default {
 </script>
 
 <template>
-    <main>
-        <div class="input-group">
-            <input type="text" class="form-control" v-model="waypoint" />
-            <div class="input-group-append">
-                <button type="button" class="btn btn-primary" @click="viewMarket">View Market</button>
-            </div>
-        </div> 
-        <div class="row">
-            <div class="col">
-                <MarketCard :market="market"></MarketCard>
-            </div>
-        </div>     
-    </main>
+  <main>
+    <div class="input-group">
+      <input type="text" class="form-control" v-model="waypoint" />
+      <div class="input-group-append">
+        <button type="button" class="btn btn-primary" @click="viewMarket">View Market</button>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <MarketCard :market="market"></MarketCard>
+      </div>
+    </div>
+  </main>
 </template>

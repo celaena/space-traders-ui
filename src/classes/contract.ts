@@ -1,11 +1,11 @@
-import ContractTerms from './contract-terms';
+import ContractTerms from './contract-terms'
 
 export default class Contract {
-    id?:string;
-    factionSymbol?:string;
-    type?:string;
-    terms?:ContractTerms = new ContractTerms();
-    accepted?:boolean;
-    fulfilled?:boolean;
-    expiration?:Date;
+  id?: string
+  factionSymbol?: string
+  type?: string
+  terms?: ContractTerms = new ContractTerms()
+  accepted?: boolean
+  fulfilled?: boolean
+  expiration?: Date
 }

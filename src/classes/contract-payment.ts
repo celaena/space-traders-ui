@@ -1,4 +1,4 @@
 export default class ContractTerms {
-    onAccepted?:number;
-    onFulfilled?:number;     
+  onAccepted?: number
+  onFulfilled?: number
 }

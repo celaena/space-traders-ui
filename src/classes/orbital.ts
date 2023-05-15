@@ -1,3 +1,3 @@
 export default class Orbital {
-    symbol?:string;
+  symbol?: string
 }

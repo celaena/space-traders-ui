@@ -1,5 +1,5 @@
 export default class Trait {
-    symbol?:string;
-    name?:string;
-    description?:string;
+  symbol?: string
+  name?: string
+  description?: string
 }

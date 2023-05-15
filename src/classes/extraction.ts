@@ -1,6 +1,6 @@
-import ExtractionYield from "./extraction-yield";
+import ExtractionYield from './extraction-yield'
 
 export default class Extraction {
-    shipSymbol?: string;
-    yield?: ExtractionYield = new ExtractionYield();
+  shipSymbol?: string
+  yield?: ExtractionYield = new ExtractionYield()
 }

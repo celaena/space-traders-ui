@@ -1,4 +1,4 @@
 export default class ShipFuelConsumption {
-    amount?: number;
-    timestamp?: Date;
+  amount?: number
+  timestamp?: Date
 }

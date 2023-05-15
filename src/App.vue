@@ -3,7 +3,7 @@ import { RouterLink, RouterView } from 'vue-router'
 import LoginBar from '@/components/LoginBar.vue'
 
 // export default {
-//   mounted() {    
+//   mounted() {
 //     document.querySelectorAll('[data-bs-toggle="tooltip"]')
 //     .forEach(tooltip => {
 //       new bootstrap.Tooltip(tooltip)
@@ -14,11 +14,6 @@ import LoginBar from '@/components/LoginBar.vue'
 
 <template>
   <div class="container container-fluid">
-    <div class="row">
-      <div class="col">
-        <h3>Space Traders UI for Babby</h3>
-      </div>
-    </div>
     <LoginBar></LoginBar>
 
     <div class="btn-group w-100" role="group" aria-label="Nav Tabs">

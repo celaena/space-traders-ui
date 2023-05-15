@@ -25,12 +25,12 @@ export default {
 </script>
 
 <template>
-    <main>
-        <button type="button" class="btn btn-primary" @click="listShips">View Ships</button>
-        <div class="row">
-          <div class="col-12" v-for="ship in ships">
-            <ShipCard :ship="ship"></ShipCard>
-          </div>
-        </div>
-    </main>
+  <main>
+    <button type="button" class="btn btn-primary" @click="listShips">View Ships</button>
+    <div class="row">
+      <div class="col-12" v-for="ship in ships">
+        <ShipCard :ship="ship"></ShipCard>
+      </div>
+    </div>
+  </main>
 </template>

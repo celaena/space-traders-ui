@@ -66,27 +66,37 @@ export default {
 
 <template>
   <main>
-    <div class="row">      
+    <div class="row">
       <div class="col-4">
         <div class="input-group">
-            <div class="input-group-prepend">
-                <span class="input-group-text">Waypoint</span>
-            </div>
-            <input type="text" class="form-control" v-model="shipyardWaypoint" />
-            <div class="input-group-append">
-                <button type="button" class="btn btn-primary" @click="viewShipyard(shipyardWaypoint)">View Shipyard</button>
-            </div>
+          <div class="input-group-prepend">
+            <span class="input-group-text">Waypoint</span>
+          </div>
+          <input type="text" class="form-control" v-model="shipyardWaypoint" />
+          <div class="input-group-append">
+            <button type="button" class="btn btn-primary" @click="viewShipyard(shipyardWaypoint)">
+              View Shipyard
+            </button>
+          </div>
         </div>
       </div>
     </div>
     <div class="row">
       <div class="col" v-for="ship in shipyard.shipTypes">
-        <button type="button" class="btn btn-success" @click="purchaseShip(shipyardWaypoint, ship.type)">{{ ship.type }}</button>
+        <button
+          type="button"
+          class="btn btn-success"
+          @click="purchaseShip(shipyardWaypoint, ship.type)"
+        >
+          {{ ship.type }}
+        </button>
       </div>
     </div>
     <div class="row">
       <div class="col">
-        <button type="button" class="btn btn-primary" @click="getWaypoints">Get Nearby Waypoints</button>
+        <button type="button" class="btn btn-primary" @click="getWaypoints">
+          Get Nearby Waypoints
+        </button>
       </div>
       <div class="col">
         <button type="button" class="btn btn-primary" @click="getWaypoint">Get Waypoint</button>
@@ -103,7 +113,9 @@ export default {
         <button type="button" class="btn btn-primary" @click="getContract">Get Contract</button>
       </div>
       <div class="col">
-        <button type="button" class="btn btn-success" @click="acceptContract">Accept Contract</button>
+        <button type="button" class="btn btn-success" @click="acceptContract">
+          Accept Contract
+        </button>
       </div>
     </div>
     <ContractCard :contract="contract"></ContractCard>

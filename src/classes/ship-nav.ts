@@ -1,9 +1,9 @@
-import ShipNavRoute from './ship-nav-route';
+import ShipNavRoute from './ship-nav-route'
 
 export default class ShipNav {
-    systemSymbol?: string;
-    waypointSymbol?: string;
-    route: ShipNavRoute = new ShipNavRoute();
-    status?: string;
-    flightMode?: string;
+  systemSymbol?: string
+  waypointSymbol?: string
+  route: ShipNavRoute = new ShipNavRoute()
+  status?: string
+  flightMode?: string
 }

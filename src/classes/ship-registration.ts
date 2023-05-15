@@ -1,5 +1,5 @@
 export default class ShipRegistration {
-    name?: string;
-    factionSymbol?: string;
-    role?: string;
+  name?: string
+  factionSymbol?: string
+  role?: string
 }

@@ -1,4 +1,4 @@
 export default class ExtractionYield {
-    symbol?: string;
-    units?: number;
+  symbol?: string
+  units?: number
 }

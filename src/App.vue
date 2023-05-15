@@ -1,9 +1,15 @@
 <script setup lang="ts">
-import Vue from 'vue'
 import { RouterLink, RouterView } from 'vue-router'
-import bootstrap from 'bootstrap'
-import { BootstrapVue, IconsPlugin } from 'bootstrap-vue-next'
 import LoginBar from '@/components/LoginBar.vue'
+
+// export default {
+//   mounted() {    
+//     document.querySelectorAll('[data-bs-toggle="tooltip"]')
+//     .forEach(tooltip => {
+//       new bootstrap.Tooltip(tooltip)
+//     })
+//   }
+// }
 </script>
 
 <template>

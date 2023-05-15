@@ -112,9 +112,8 @@ export default {
                 <div class="accordion-body">
                   <div class="row" v-for="item in ship.cargo.inventory">
                     <div class="col">
-                      {{ item.name }} <span class="material-icons">help_outline</span>
+                      {{ item.name }} <span class="material-icons" v-b-tooltip.hover.right v-bind:title="item.description">help_outline</span>
                     </div>
-                    <div class="col">{{ item.description }}</div>
                     <div class="col">{{ item.units }}</div>
                     <div class="col">
                       <button
@@ -243,8 +242,9 @@ export default {
               >
                 <div class="accordion-body">
                   <div class="row">
-                    <div class="col">{{ ship.frame.name }}</div>
-                    <div class="col">{{ ship.frame.description }}</div>
+                    <div class="col">
+                      {{ ship.frame.name }} <span class="material-icons" v-b-tooltip.hover.right v-bind:title="ship.frame.description">help_outline</span>
+                    </div>
                     <div class="col">{{ ship.frame.condition }}</div>
                     <div class="col">{{ ship.frame.moduleSlots }}</div>
                     <div class="col">{{ ship.frame.mountingPoints }}</div>
@@ -254,8 +254,9 @@ export default {
                     <div class="col">{{ ship.frame.requirements.slots }}</div>
                   </div>
                   <div class="row">
-                    <div class="col">{{ ship.reactor.name }}</div>
-                    <div class="col">{{ ship.reactor.description }}</div>
+                    <div class="col">
+                      {{ ship.reactor.name }} <span class="material-icons" v-b-tooltip.hover.right v-bind:title="ship.reactor.description">help_outline</span>
+                    </div>
                     <div class="col">{{ ship.reactor.condition }}</div>
                     <div class="col">{{ ship.reactor.powerOutput }}</div>
                     <div class="col">{{ ship.reactor.requirements.power }}</div>
@@ -263,8 +264,9 @@ export default {
                     <div class="col">{{ ship.reactor.requirements.slots }}</div>
                   </div>
                   <div class="row">
-                    <div class="col">{{ ship.engine.name }}</div>
-                    <div class="col">{{ ship.engine.description }}</div>
+                    <div class="col">
+                      {{ ship.engine.name }} <span class="material-icons" v-b-tooltip.hover.right v-bind:title="ship.engine.description">help_outline</span>
+                    </div>
                     <div class="col">{{ ship.engine.condition }}</div>
                     <div class="col">{{ ship.engine.speed }}</div>
                     <div class="col">{{ ship.engine.requirements.power }}</div>
@@ -295,8 +297,9 @@ export default {
               >
                 <div class="accordion-body">
                   <div class="row" v-for="module in ship.modules">
-                    <div class="col">{{ module.name }}</div>
-                    <div class="col">{{ module.description }}</div>
+                    <div class="col">
+                      {{ module.name }} <span class="material-icons" v-b-tooltip.hover.right v-bind:title="module.description">help_outline</span>
+                    </div>
                     <div class="col">{{ module.capacity }}</div>
                     <div class="col">{{ module.range }}</div>
                     <div class="col">{{ module.requirements.power }}</div>
@@ -327,8 +330,9 @@ export default {
               >
                 <div class="accordion-body">
                   <div class="row" v-for="mount in ship.mounts">
-                    <div class="col">{{ mount.name }}</div>
-                    <div class="col">{{ mount.description }}</div>
+                    <div class="col">
+                      {{ mount.name }} <span class="material-icons" v-b-tooltip.hover.right v-bind:title="mount.description">help_outline</span>
+                    </div>
                     <div class="col">{{ mount.strength }}</div>
                     <div class="col" v-for="deposit in mount.deposits">{{ deposit }}</div>
                     <div class="col">{{ mount.requirements.power }}</div>

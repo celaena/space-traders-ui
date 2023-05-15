@@ -33,25 +33,25 @@ export default {
             <div class="col">
               <h3>Exports</h3>
               <div class="row" v-for="good in market.exports">
-                <div class="col">{{ good.symbol }}</div>
-                <div class="col">{{ good.name }}</div>
-                <div class="col">{{ good.description }}</div>
+                <div class="col">                  
+                  {{ good.name }} <span class="material-icons" v-b-tooltip.hover.right v-bind:title="good.description">help_outline</span>
+                </div>
               </div>
             </div>
             <div class="col">
               <h3>Imports</h3>
               <div class="row" v-for="good in market.imports">
-                <div class="col">{{ good.symbol }}</div>
-                <div class="col">{{ good.name }}</div>
-                <div class="col">{{ good.description }}</div>
+                <div class="col">                  
+                  {{ good.name }} <span class="material-icons" v-b-tooltip.hover.right v-bind:title="good.description">help_outline</span>
+                </div>
               </div>
             </div>
             <div class="col">
               <h3>Exchange</h3>
               <div class="row" v-for="good in market.exchange">
-                <div class="col">{{ good.symbol }}</div>
-                <div class="col">{{ good.name }}</div>
-                <div class="col">{{ good.description }}</div>
+                <div class="col">                  
+                  {{ good.name }} <span class="material-icons" v-b-tooltip.hover.right v-bind:title="good.description">help_outline</span>
+                </div>
               </div>
             </div>
           </div>

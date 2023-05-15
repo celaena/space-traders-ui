@@ -21,7 +21,8 @@ export default {
       nearbyWaypointPages: [],
       waypoints: [],
       waypoint: new Waypoint(),
-      contract: new Contract(),
+      contracts: [],
+      contractId: undefined,
       shipyardWaypoint: undefined,
       shipyard: {}
     }
@@ -53,12 +54,12 @@ export default {
     async purchaseShip(wp, type) {
         await fleetService.purchaseShip(this.account.token, wp, type);
     },
-    async getContract(e) {
-      this.contract = await contractService.getContract(this.account.token, 'clhfm42tp00lks60drc1511z8');
+    async getContracts() {
+      this.contracts = await contractService.listContracts(this.account.token);
     },
-    async acceptContract(e) {
-      await contractService.acceptContract(this.account.token, 'clhfm42tp00lks60drc1511z8');
-      this.getContract(null);
+    async acceptContract(contractId) {
+      await contractService.acceptContract(this.account.token, contractId);
+      this.getContracts();
     }
   }
 }
@@ -110,14 +111,26 @@ export default {
     <WaypointCard :waypoint="waypoint"></WaypointCard>
     <div class="row">
       <div class="col">
-        <button type="button" class="btn btn-primary" @click="getContract">Get Contract</button>
+        <button type="button" class="btn btn-primary" @click="getContracts">Get Contracts</button>
       </div>
       <div class="col">
-        <button type="button" class="btn btn-success" @click="acceptContract">
-          Accept Contract
-        </button>
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text">Contract</span>
+          </div>
+          <input type="text" class="form-control" v-model="contractId" />
+          <div class="input-group-append">
+            <button type="button" class="btn btn-success" @click="acceptContract(contractId)">
+              Accept
+            </button>
+          </div>
+        </div>
       </div>
     </div>
-    <ContractCard :contract="contract"></ContractCard>
+    <div class="row">
+      <div class="col-12" v-for="con in contracts">
+        <ContractCard :contract="con"></ContractCard>
+      </div>
+    </div>
   </main>
 </template>

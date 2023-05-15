@@ -15,7 +15,10 @@ export default {
   data() {
     return {
       account: accountStore(),
-      waypoint: undefined
+      waypoint: undefined,
+      surveyCode: undefined,
+      material: undefined,
+      cooldown: undefined
     }
   },
   methods: {
@@ -31,8 +34,18 @@ export default {
     async orbit() {
       await fleetService.orbitShip(this.account.token, this.ship.symbol)
     },
-    async extract() {
-      await fleetService.extractResources(this.account.token, this.ship.symbol)
+    async survey() {
+      let data = await fleetService.createSurvey(this.account.token, this.ship.symbol)
+      // todo: represent
+      this.cooldown = data.cooldown;
+    },
+    async extract(survey) {
+      let data = await fleetService.extractResources(this.account.token, this.ship.symbol, survey)      
+      this.cooldown = data.cooldown;
+    },
+    async refine(material) {
+      let data = await fleetService.refineMaterial(this.account.token, this.ship.symbol, material)
+      this.cooldown = data.cooldown;
     },
     async sellCargo(good, amount) {
       await fleetService.sellCargo(this.account.token, this.ship.symbol, good, amount)
@@ -42,17 +55,41 @@ export default {
 </script>
 <template>
   <div class="row">
-    <div class="col-2">
+    <div class="col">
       <button type="button" class="btn btn-primary" @click="dock">Dock</button>
     </div>
-    <div class="col-2">
+    <div class="col">
       <button type="button" class="btn btn-primary" @click="refuel">Refuel</button>
     </div>
-    <div class="col-2">
+    <div class="col">
       <button type="button" class="btn btn-primary" @click="orbit">Orbit</button>
     </div>
-    <div class="col-2">
-      <button type="button" class="btn btn-primary" @click="extract">Extract</button>
+    <div class="col">
+      <div class="input-group">
+        <input type="text" class="form-control" v-model="surveyCode" />
+        <div class="input-group-append">
+          <button type="button" class="btn btn-primary" @click="extract(surveyCode)">
+            Extract
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <div class="input-group">
+        <select class="form-select" v-model="material">
+          <option value="IRON_ORE">Iron Ore</option>
+        </select>
+        <div class="input-group-append">
+          <button type="button" class="btn btn-primary" @click="refine(material)">
+            Refine
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <button type="button" class="btn btn-primary" @click="survey">Survey</button>
     </div>
     <div class="col">
       <div class="input-group">
@@ -74,13 +111,7 @@ export default {
               <span class="material-icons">assignment</span> {{ ship.symbol }}
             </div>
             <div class="col">
-              <span class="material-icons">person</span> {{ ship.registration.name }}
-            </div>
-            <div class="col">
-              <span class="material-icons">groups_3</span> {{ ship.registration.factionSymbol }}
-            </div>
-            <div class="col-2">
-              <span class="material-icons">gavel</span> {{ ship.registration.role }}
+              <span class="material-icons">update</span> {{ cooldown ? cooldown.expiration : '' }}
             </div>
             <div class="col">
               <span class="material-icons">oil_barrel</span> {{ ship.fuel.current }} /
@@ -90,6 +121,40 @@ export default {
         </div>
         <div class="card-body">
           <div class="accordion" id="accordionExample">
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="heading7">
+                <button
+                  class="accordion-button collapsed"
+                  type="button"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#collapse7"
+                  aria-expanded="false"
+                  aria-controls="collapse7"
+                >
+                  Registration
+                </button>
+              </h2>
+              <div
+                id="collapse7"
+                class="accordion-collapse collapse"
+                aria-labelledby="heading7"
+                data-bs-parent="#accordionExample"
+              >
+                <div class="accordion-body">
+                  <div class="row">
+                    <div class="col">
+                      <span class="material-icons">person</span> {{ ship.registration.name }}
+                    </div>
+                    <div class="col">
+                      <span class="material-icons">groups_3</span> {{ ship.registration.factionSymbol }}
+                    </div>
+                    <div class="col">
+                      <span class="material-icons">gavel</span> {{ ship.registration.role }}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
             <div class="accordion-item">
               <h2 class="accordion-header" id="heading6">
                 <button
@@ -135,7 +200,7 @@ export default {
                   type="button"
                   data-bs-toggle="collapse"
                   data-bs-target="#collapseOne"
-                  aria-expanded="true"
+                  aria-expanded="false"
                   aria-controls="collapseOne"
                 >
                   Navigation
@@ -143,7 +208,7 @@ export default {
               </h2>
               <div
                 id="collapseOne"
-                class="accordion-collapse collapse show"
+                class="accordion-collapse collapse"
                 aria-labelledby="headingOne"
                 data-bs-parent="#accordionExample"
               >

@@ -1,23 +1,19 @@
 <script setup lang="js">
-import FleetService from '@/services/FleetService';
-import { accountStore } from '@/stores/account';
-
-const fleetService = new FleetService();
+import { useShipStore } from '@/stores/ships';
 
 export default {
   data() {
     return {
-      account: accountStore(),
-      ships: []
+      shipStore: useShipStore()
     }
   },
   methods: {
     async listShips() {
-        this.ships = await fleetService.listShips(this.account.token);
+        this.shipStore.getShips();
     }
   },
   mounted() {
-    if (this.account.token) {
+    if (this.shipStore.ships.length === 0) {
       this.listShips();
     }
   }
@@ -28,7 +24,7 @@ export default {
   <main>
     <button type="button" class="btn btn-primary" @click="listShips">View Ships</button>
     <div class="row">
-      <div class="col-12" v-for="ship in ships">
+      <div class="col-12" v-for="ship in shipStore.ships">
         <ShipCard :ship="ship"></ShipCard>
       </div>
     </div>

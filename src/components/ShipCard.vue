@@ -18,7 +18,8 @@ export default {
       waypoint: undefined,
       surveyCode: undefined,
       material: undefined,
-      autoextract: false
+      autoextract: false,
+      transferShip: ''
     }
   },
   methods: {
@@ -55,6 +56,9 @@ export default {
     },
     async sellCargo(good, amount) {
       await fleetService.sellCargo(this.account.token, this.ship.symbol, good, amount)
+    },
+    async transferCargo(good, amount, ship) {
+      await fleetService.transferCargo(this.account.token, this.ship.symbol, good, amount, ship)
     }
   },
   watch: {
@@ -214,6 +218,16 @@ export default {
                       >
                         Sell
                       </button>
+                    </div>
+                    <div class="col">
+                      <div class="input-group">
+                        <input type="text" class="form-control" v-model="transferShip" />
+                        <div class="input-group-append">
+                          <button type="button" class="btn btn-primary" @click="transferCargo(item.symbol, item.units, transferShip)">
+                            Transfer
+                          </button>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>

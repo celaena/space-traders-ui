@@ -234,7 +234,7 @@ export default class FleetService {
     const response = await axios.post(
       'https://api.spacetraders.io/v2/my/ships/' + symbol + '/transfer',
       {
-        symbol: item,
+        tradeSymbol: item,
         units: units,
         shipSymbol: destination
       },

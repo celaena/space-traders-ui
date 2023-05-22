@@ -23,6 +23,9 @@ export default {
       waypoint: new Waypoint(),
       contracts: [],
       contractId: undefined,
+      contractDeliverShip: undefined,
+      contractDeliverItem: undefined,
+      contractDeliverAmount: undefined,
       shipyardWaypoint: undefined,
       shipyard: {}
     }
@@ -59,6 +62,10 @@ export default {
     },
     async acceptContract(contractId) {
       await contractService.acceptContract(this.account.token, contractId);
+      this.getContracts();
+    },
+    async deliverContract(contractId, shipId, item, amount) {
+      await contractService.deliverContract(this.account.token, contractId, shipId, item, amount);
       this.getContracts();
     }
   }
@@ -122,6 +129,27 @@ export default {
           <div class="input-group-append">
             <button type="button" class="btn btn-success" @click="acceptContract(contractId)">
               Accept
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text">Ship</span>
+          </div>
+          <input type="text" class="form-control" v-model="contractDeliverShip" />
+          <div class="input-group-prepend">
+            <span class="input-group-text">Item</span>
+          </div>
+          <input type="text" class="form-control" v-model="contractDeliverItem" />
+          <div class="input-group-prepend">
+            <span class="input-group-text">Amount</span>
+          </div>
+          <input type="text" class="form-control" v-model="contractDeliverAmount" />
+          <div class="input-group-append">
+            <button type="button" class="btn btn-primary" @click="deliverContract(contractId, contractDeliverShip, contractDeliverItem, contractDeliverAmount)">
+              Deliver
             </button>
           </div>
         </div>

@@ -18,7 +18,7 @@ export default {
       waypoint: undefined,
       surveyCode: undefined,
       material: undefined,
-      cooldown: undefined
+      autoextract: false
     }
   },
   methods: {
@@ -40,8 +40,14 @@ export default {
       this.cooldown = data.cooldown;
     },
     async extract(survey) {
-      let data = await fleetService.extractResources(this.account.token, this.ship.symbol, survey)      
-      this.cooldown = data.cooldown;
+      while (this.autoextract) {
+        let data = await fleetService.extractResources(this.account.token, this.ship.symbol, survey)      
+        this.ship.cooldown = data.cooldown;
+        this.ship.cargo = data.cargo;
+        // todo: represent
+        console.log(data.extraction);
+        await new Promise(r => setTimeout(r, this.ship.cooldown.remainingSeconds * 1000));
+      }
     },
     async refine(material) {
       let data = await fleetService.refineMaterial(this.account.token, this.ship.symbol, material)
@@ -49,6 +55,20 @@ export default {
     },
     async sellCargo(good, amount) {
       await fleetService.sellCargo(this.account.token, this.ship.symbol, good, amount)
+    }
+  },
+  watch: {
+    'ship.cooldown.remainingSeconds'(value) {
+      if (value > 0) {
+          setTimeout(() => {
+            this.ship.cooldown.remainingSeconds--;
+          }, 1000);
+      }
+    },
+    autoextract(value) {
+      if (this.autoextract) {
+        this.extract();
+      }
     }
   }
 }
@@ -68,7 +88,10 @@ export default {
       <div class="input-group">
         <input type="text" class="form-control" v-model="surveyCode" />
         <div class="input-group-append">
-          <button type="button" class="btn btn-primary" @click="extract(surveyCode)">
+          <button type="button" class="btn btn-primary" @click="autoextract = !autoextract">
+            <div class="spinner-border spinner-border-sm" role="status" v-show="autoextract">
+              <span class="visually-hidden">Loading...</span>
+            </div>
             Extract
           </button>
         </div>
@@ -111,7 +134,10 @@ export default {
               <span class="material-icons">assignment</span> {{ ship.symbol }}
             </div>
             <div class="col">
-              <span class="material-icons">update</span> {{ cooldown ? cooldown.expiration : '' }}
+              <span class="material-icons">games</span> {{ ship.nav.status }}
+            </div>
+            <div class="col">
+              <span class="material-icons">update</span> {{ ship.cooldown ? ship.cooldown.remainingSeconds : '?' }}
             </div>
             <div class="col">
               <span class="material-icons">oil_barrel</span> {{ ship.fuel.current }} /
@@ -219,9 +245,6 @@ export default {
                     </div>
                     <div class="col">
                       <span class="material-icons">place</span> {{ ship.nav.waypointSymbol }}
-                    </div>
-                    <div class="col">
-                      <span class="material-icons">games</span> {{ ship.nav.status }}
                     </div>
                     <div class="col">
                       <span class="material-icons">flight</span> {{ ship.nav.flightMode }}

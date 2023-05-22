@@ -8,6 +8,7 @@ import ShipModule from './ship-module'
 import ShipMount from './ship-mount'
 import ShipCargo from './ship-cargo'
 import ShipFuel from './ship-fuel'
+import Cooldown from './cooldown'
 
 export default class Ship {
   symbol?: string
@@ -21,4 +22,5 @@ export default class Ship {
   mounts: ShipMount[] = []
   cargo: ShipCargo = new ShipCargo()
   fuel: ShipFuel = new ShipFuel()
+  cooldown: Cooldown = new Cooldown()
 }
